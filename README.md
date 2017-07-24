@@ -6,8 +6,11 @@ can fire projectiles with space key.
 The objective is to destroy all enemy ships before they reach the bottom of the screen.
 
 # Screenshots
+Gameplay. Player's jet, enemy ships, rocket.
 ![Gameplay](https://raw.githubusercontent.com/kmerenkov/galaxy/master/media/game.png)
 
+Explosion (expanding circle animation).
 ![Explosion](https://raw.githubusercontent.com/kmerenkov/galaxy/master/media/explosion.png)
 
+Dark Souls of Space Invaders.
 ![Dark Souls of Space Invaders](https://raw.githubusercontent.com/kmerenkov/galaxy/master/media/game_over.png)
