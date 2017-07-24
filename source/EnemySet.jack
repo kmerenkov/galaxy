@@ -1,0 +1,118 @@
+/*
+EnemySet - a collection of enemy ships with some helpful functions.
+ */
+class EnemySet {
+    /* pool of enemy ships */
+    field EnemyShip enemy01;
+    field EnemyShip enemy02;
+    field EnemyShip enemy03;
+    field EnemyShip enemy04;
+    field EnemyShip enemy05;
+    field EnemyShip enemy06;
+    field EnemyShip enemy07;
+    field EnemyShip enemy08;
+
+    constructor EnemySet new() {
+        let enemy01 = EnemyShip.new();
+        let enemy02 = EnemyShip.new();
+        let enemy03 = EnemyShip.new();
+        let enemy04 = EnemyShip.new();
+        let enemy05 = EnemyShip.new();
+        let enemy06 = EnemyShip.new();
+        let enemy07 = EnemyShip.new();
+        let enemy08 = EnemyShip.new();
+        return this;
+    }
+
+    /** return true if any enemy ship reached the bottom of the screen **/
+    method boolean reachedEnd() {
+        if (enemyReachedEnd(enemy01)) {
+            return true;
+        } else { if (enemyReachedEnd(enemy02)) {
+            return true;
+        } else { if (enemyReachedEnd(enemy03)) {
+            return true;
+        } else { if (enemyReachedEnd(enemy04)) {
+            return true;
+        } else { if (enemyReachedEnd(enemy05)) {
+            return true;
+        } else { if (enemyReachedEnd(enemy06)) {
+            return true;
+        } else { if (enemyReachedEnd(enemy07)) {
+            return true;
+        } else { if (enemyReachedEnd(enemy08)) {
+            return true;
+        }}}}}}}}
+        return false;
+    }
+
+    /** returns true if at least one enemy is alive **/
+    method boolean anyAliveEnemy() {
+        if (enemy01.isAlive()) { return true; }
+        if (enemy02.isAlive()) { return true; }
+        if (enemy03.isAlive()) { return true; }
+        if (enemy04.isAlive()) { return true; }
+        if (enemy05.isAlive()) { return true; }
+        if (enemy06.isAlive()) { return true; }
+        if (enemy07.isAlive()) { return true; }
+        if (enemy08.isAlive()) { return true; }
+        return false;
+    }
+
+    /** check if a particular enemy ship reached the bottom of the screen **/
+    method boolean enemyReachedEnd(EnemyShip e) {
+        return (e.getY() > 229);
+    }
+
+    /** try to find collisions with bullets for each enemy ship **/
+    method void checkIfHit(BulletSet bs) {
+        do bs.handleOneEnemyDown(enemy01);
+        do bs.handleOneEnemyDown(enemy02);
+        do bs.handleOneEnemyDown(enemy03);
+        do bs.handleOneEnemyDown(enemy04);
+        do bs.handleOneEnemyDown(enemy05);
+        do bs.handleOneEnemyDown(enemy06);
+        do bs.handleOneEnemyDown(enemy07);
+        do bs.handleOneEnemyDown(enemy08);
+        return;
+    }
+
+    /** spawn enemies on screen **/
+    method void activate() {
+        do enemy01.activate(40, 20);
+        do enemy02.activate(80, 20);
+        do enemy03.activate(120, 20);
+        do enemy04.activate(160, 20);
+        do enemy05.activate(200, 20);
+        do enemy06.activate(240, 20);
+        do enemy07.activate(280, 20);
+        do enemy08.activate(320, 20);
+        return;
+    }
+
+    method void dispose() {
+        do enemy01.dispose();
+        do enemy02.dispose();
+        do enemy03.dispose();
+        do enemy04.dispose();
+        do enemy05.dispose();
+        do enemy06.dispose();
+        do enemy07.dispose();
+        do enemy08.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /** called from mainloop, does whatever is necessary for enemy ships in current state **/
+    method void run() {
+        do enemy01.run();
+        do enemy02.run();
+        do enemy03.run();
+        do enemy04.run();
+        do enemy05.run();
+        do enemy06.run();
+        do enemy07.run();
+        do enemy08.run();
+        return;
+    }
+}

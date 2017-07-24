@@ -1,0 +1,190 @@
+/*
+Bullet class - a projectile with animation of flight and explosion
+ */
+class Bullet {
+    field int x, y; // location of a bullet
+    field boolean isActive;
+    field int animationSequence; // frame counter, resets to zero when reaches a certain point
+
+    constructor Bullet new() {
+        let x = 0;
+        let y = 0;
+        return this;
+    }
+
+    /** x, y setter **/
+    method void setXY(int Ax, int Ay) {
+        /* bullet gets reused, so there must be a way to set new coords */
+        let x = Ax;
+        let y = Ay;
+        return;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /** getters **/
+    method int getX() { return x; }
+    method int getY() { return y; }
+    method boolean getActive() { return isActive; }
+
+    /** render first frame **/
+    method void draw0() {
+        var int memAddress;
+        let memAddress = 16384 + (x/16) + (y*32);
+        do Memory.poke(memAddress+0, 384);
+        do Memory.poke(memAddress+32, 384);
+        do Memory.poke(memAddress+64, 384);
+        do Memory.poke(memAddress+96, 384);
+        do Memory.poke(memAddress+128, 384);
+        do Memory.poke(memAddress+160, 384);
+        do Memory.poke(memAddress+192, 384);
+        do Memory.poke(memAddress+224, 384);
+        do Memory.poke(memAddress+256, 384);
+        do Memory.poke(memAddress+288, 704);
+        do Memory.poke(memAddress+320, 1608);
+        do Memory.poke(memAddress+352, 4128);
+        do Memory.poke(memAddress+384, 17668);
+        do Memory.poke(memAddress+416, 2064);
+        do Memory.poke(memAddress+448, 16512);
+        do Memory.poke(memAddress+480, 1032);
+        return;
+    }
+
+    /** render second frame **/
+    method void draw1() {
+        var int memAddress;
+        let memAddress = 16384 + (x/16) + (y*32);
+        do Memory.poke(memAddress+0, 384);
+        do Memory.poke(memAddress+32, 384);
+        do Memory.poke(memAddress+64, 384);
+        do Memory.poke(memAddress+96, 384);
+        do Memory.poke(memAddress+128, 384);
+        do Memory.poke(memAddress+160, 384);
+        do Memory.poke(memAddress+192, 384);
+        do Memory.poke(memAddress+224, 0);
+        do Memory.poke(memAddress+256, 0);
+        do Memory.poke(memAddress+288, 512);
+        do Memory.poke(memAddress+320, 5200);
+        do Memory.poke(memAddress+352, 0);
+        do Memory.poke(memAddress+384, 9488);
+        do Memory.poke(memAddress+416, 0);
+        do Memory.poke(memAddress+448, 20516);
+        do Memory.poke(memAddress+480, 1296);
+        return;
+    }
+
+    /** render third frame **/
+    method void draw2() {
+        var int memAddress;
+        let memAddress = 16384 + (x/16) + (y*32);
+        do Memory.poke(memAddress+0, 384);
+        do Memory.poke(memAddress+32, 384);
+        do Memory.poke(memAddress+64, 384);
+        do Memory.poke(memAddress+96, 384);
+        do Memory.poke(memAddress+128, 384);
+        do Memory.poke(memAddress+160, 1408);
+        do Memory.poke(memAddress+192, 416);
+        do Memory.poke(memAddress+224, 384);
+        do Memory.poke(memAddress+256, 384);
+        do Memory.poke(memAddress+288, 0);
+        do Memory.poke(memAddress+320, 584);
+        do Memory.poke(memAddress+352, 5120);
+        do Memory.poke(memAddress+384, 288);
+        do Memory.poke(memAddress+416, 9224);
+        do Memory.poke(memAddress+448, 32);
+        do Memory.poke(memAddress+480, 21508);
+        return;
+    }
+
+    /** render bullets animation **/
+    method void draw() {
+        /* render 3 frames depending on animationSequence value */
+        if (animationSequence = 0) {
+            do draw0();
+        }
+        else {
+            if (animationSequence = 1) {
+                do draw1();
+            }
+            else {
+                if (animationSequence = 2) {
+                    do draw2();
+                }
+            }
+        }
+        if (animationSequence < 2) {
+            let animationSequence = animationSequence + 1;
+        }
+        else {
+            let animationSequence = 0;
+        }
+        return;
+    }
+
+    /** render blank pixels instead of bullet **/
+    method void erase() {
+        var int memAddress;
+        let memAddress = 16384 + (x/16) + (y*32);
+        do Memory.poke(memAddress+0, 0);
+        do Memory.poke(memAddress+32, 0);
+        do Memory.poke(memAddress+64, 0);
+        do Memory.poke(memAddress+96, 0);
+        do Memory.poke(memAddress+128, 0);
+        do Memory.poke(memAddress+160, 0);
+        do Memory.poke(memAddress+192, 0);
+        do Memory.poke(memAddress+224, 0);
+        do Memory.poke(memAddress+256, 0);
+        do Memory.poke(memAddress+288, 0);
+        do Memory.poke(memAddress+320, 0);
+        do Memory.poke(memAddress+352, 0);
+        do Memory.poke(memAddress+384, 0);
+        do Memory.poke(memAddress+416, 0);
+        do Memory.poke(memAddress+448, 0);
+        do Memory.poke(memAddress+480, 0);
+        return;
+    }
+
+    /** set x, y coords and activate rendering and moving of a projectile **/
+    method void fire(int Ax, int Ay) {
+        do setXY(Ax, Ay);
+        do activate();
+        return;
+    }
+
+    method void run() {
+        /* gets invoked from program mainloop, makes bullet fly */
+        if (isActive) { do moveUp(); }
+        return;
+    }
+
+    method void activate() {
+        /* mark as active, i.e. allow animation, make bullet visible, etc */
+        let isActive = true;
+        do moveUp();
+        return;
+    }
+
+    method void deactivate() {
+        /* mark as deactive, erase from screen, disable animation, etc */
+        let isActive = false;
+        do erase();
+        return;
+    }
+
+    /** makes bullet fly upward **/
+    method void moveUp() {
+        if (~isActive) { return; }
+        if (y > 1) {
+            do erase();
+            let y = y - 2;
+            do draw();
+        }
+        else {
+            do deactivate();
+        }
+        return;
+    }
+}

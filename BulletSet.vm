@@ -1,0 +1,667 @@
+function BulletSet.new 0
+push constant 15
+call Memory.alloc 1
+pop pointer 0
+call Bullet.new 0
+pop this 0
+call Bullet.new 0
+pop this 1
+call Bullet.new 0
+pop this 2
+call Bullet.new 0
+pop this 3
+call Bullet.new 0
+pop this 4
+call Bullet.new 0
+pop this 5
+call Bullet.new 0
+pop this 6
+call Bullet.new 0
+pop this 7
+call Bullet.new 0
+pop this 8
+call Bullet.new 0
+pop this 9
+call Bullet.new 0
+pop this 10
+call Bullet.new 0
+pop this 11
+call Bullet.new 0
+pop this 12
+call Bullet.new 0
+pop this 13
+call Bullet.new 0
+pop this 14
+push pointer 0
+return
+function BulletSet.dispose 0
+push argument 0
+pop pointer 0
+push this 0
+call Bullet.dispose 1
+pop temp 0
+push this 1
+call Bullet.dispose 1
+pop temp 0
+push this 2
+call Bullet.dispose 1
+pop temp 0
+push this 3
+call Bullet.dispose 1
+pop temp 0
+push this 4
+call Bullet.dispose 1
+pop temp 0
+push this 5
+call Bullet.dispose 1
+pop temp 0
+push this 6
+call Bullet.dispose 1
+pop temp 0
+push this 7
+call Bullet.dispose 1
+pop temp 0
+push this 8
+call Bullet.dispose 1
+pop temp 0
+push this 9
+call Bullet.dispose 1
+pop temp 0
+push this 10
+call Bullet.dispose 1
+pop temp 0
+push this 11
+call Bullet.dispose 1
+pop temp 0
+push this 12
+call Bullet.dispose 1
+pop temp 0
+push this 13
+call Bullet.dispose 1
+pop temp 0
+push this 14
+call Bullet.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function BulletSet.run 0
+push argument 0
+pop pointer 0
+push this 0
+call Bullet.run 1
+pop temp 0
+push this 1
+call Bullet.run 1
+pop temp 0
+push this 2
+call Bullet.run 1
+pop temp 0
+push this 3
+call Bullet.run 1
+pop temp 0
+push this 4
+call Bullet.run 1
+pop temp 0
+push this 5
+call Bullet.run 1
+pop temp 0
+push this 6
+call Bullet.run 1
+pop temp 0
+push this 7
+call Bullet.run 1
+pop temp 0
+push this 8
+call Bullet.run 1
+pop temp 0
+push this 9
+call Bullet.run 1
+pop temp 0
+push this 10
+call Bullet.run 1
+pop temp 0
+push this 11
+call Bullet.run 1
+pop temp 0
+push this 12
+call Bullet.run 1
+pop temp 0
+push this 13
+call Bullet.run 1
+pop temp 0
+push this 14
+call Bullet.run 1
+pop temp 0
+push pointer 0
+push argument 1
+call BulletSet.handleEnemyDown 2
+pop temp 0
+push constant 0
+return
+function BulletSet.fire 0
+push argument 0
+pop pointer 0
+push this 0
+call Bullet.getActive 1
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 0
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END0
+label IF_FALSE0
+push this 1
+call Bullet.getActive 1
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 1
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END1
+label IF_FALSE1
+push this 2
+call Bullet.getActive 1
+not
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 2
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END2
+label IF_FALSE2
+push this 3
+call Bullet.getActive 1
+not
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 3
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END3
+label IF_FALSE3
+push this 4
+call Bullet.getActive 1
+not
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push this 4
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END4
+label IF_FALSE4
+push this 5
+call Bullet.getActive 1
+not
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push this 5
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END5
+label IF_FALSE5
+push this 6
+call Bullet.getActive 1
+not
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push this 6
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END6
+label IF_FALSE6
+push this 7
+call Bullet.getActive 1
+not
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push this 7
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END7
+label IF_FALSE7
+push this 8
+call Bullet.getActive 1
+not
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push this 8
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END8
+label IF_FALSE8
+push this 9
+call Bullet.getActive 1
+not
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
+push this 9
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END9
+label IF_FALSE9
+push this 10
+call Bullet.getActive 1
+not
+if-goto IF_TRUE10
+goto IF_FALSE10
+label IF_TRUE10
+push this 10
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END10
+label IF_FALSE10
+push this 11
+call Bullet.getActive 1
+not
+if-goto IF_TRUE11
+goto IF_FALSE11
+label IF_TRUE11
+push this 11
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END11
+label IF_FALSE11
+push this 12
+call Bullet.getActive 1
+not
+if-goto IF_TRUE12
+goto IF_FALSE12
+label IF_TRUE12
+push this 12
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END12
+label IF_FALSE12
+push this 13
+call Bullet.getActive 1
+not
+if-goto IF_TRUE13
+goto IF_FALSE13
+label IF_TRUE13
+push this 13
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+goto IF_END13
+label IF_FALSE13
+push this 14
+call Bullet.getActive 1
+not
+if-goto IF_TRUE14
+goto IF_FALSE14
+label IF_TRUE14
+push this 14
+push argument 1
+push argument 2
+call Bullet.fire 3
+pop temp 0
+label IF_FALSE14
+label IF_END13
+label IF_END12
+label IF_END11
+label IF_END10
+label IF_END9
+label IF_END8
+label IF_END7
+label IF_END6
+label IF_END5
+label IF_END4
+label IF_END3
+label IF_END2
+label IF_END1
+label IF_END0
+push constant 0
+return
+function BulletSet.isEnemyDown 4
+push argument 0
+pop pointer 0
+push argument 1
+call Bullet.getActive 1
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+return
+label IF_FALSE0
+push argument 2
+call EnemyShip.isAlive 1
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+return
+label IF_FALSE1
+push argument 1
+call Bullet.getX 1
+pop local 0
+push argument 1
+call Bullet.getY 1
+pop local 1
+push argument 2
+call EnemyShip.getX 1
+pop local 2
+push argument 2
+call EnemyShip.getY 1
+pop local 3
+push local 1
+push local 3
+lt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 0
+push local 2
+push constant 18
+sub
+gt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push local 0
+push local 2
+push constant 18
+add
+lt
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 0
+not
+return
+label IF_FALSE4
+label IF_FALSE3
+label IF_FALSE2
+push constant 0
+return
+function BulletSet.kill 0
+push argument 0
+pop pointer 0
+push argument 2
+call EnemyShip.explode 1
+pop temp 0
+push argument 1
+call Bullet.deactivate 1
+pop temp 0
+push constant 0
+return
+function BulletSet.handleEnemyDown 0
+push argument 0
+pop pointer 0
+push argument 1
+push pointer 0
+call EnemySet.checkIfHit 2
+pop temp 0
+push constant 0
+return
+function BulletSet.handleOneEnemyDown 0
+push argument 0
+pop pointer 0
+push pointer 0
+push this 0
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+push this 0
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END0
+label IF_FALSE0
+push pointer 0
+push this 1
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+push this 1
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END1
+label IF_FALSE1
+push pointer 0
+push this 2
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push pointer 0
+push this 2
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END2
+label IF_FALSE2
+push pointer 0
+push this 3
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push pointer 0
+push this 3
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END3
+label IF_FALSE3
+push pointer 0
+push this 4
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push pointer 0
+push this 4
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END4
+label IF_FALSE4
+push pointer 0
+push this 5
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push pointer 0
+push this 5
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END5
+label IF_FALSE5
+push pointer 0
+push this 6
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push pointer 0
+push this 6
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END6
+label IF_FALSE6
+push pointer 0
+push this 7
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push pointer 0
+push this 7
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END7
+label IF_FALSE7
+push pointer 0
+push this 8
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push pointer 0
+push this 8
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END8
+label IF_FALSE8
+push pointer 0
+push this 9
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
+push pointer 0
+push this 9
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END9
+label IF_FALSE9
+push pointer 0
+push this 10
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE10
+goto IF_FALSE10
+label IF_TRUE10
+push pointer 0
+push this 10
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END10
+label IF_FALSE10
+push pointer 0
+push this 11
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE11
+goto IF_FALSE11
+label IF_TRUE11
+push pointer 0
+push this 11
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END11
+label IF_FALSE11
+push pointer 0
+push this 12
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE12
+goto IF_FALSE12
+label IF_TRUE12
+push pointer 0
+push this 12
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END12
+label IF_FALSE12
+push pointer 0
+push this 13
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE13
+goto IF_FALSE13
+label IF_TRUE13
+push pointer 0
+push this 13
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+goto IF_END13
+label IF_FALSE13
+push pointer 0
+push this 14
+push argument 1
+call BulletSet.isEnemyDown 3
+if-goto IF_TRUE14
+goto IF_FALSE14
+label IF_TRUE14
+push pointer 0
+push this 14
+push argument 1
+call BulletSet.kill 3
+pop temp 0
+label IF_FALSE14
+label IF_END13
+label IF_END12
+label IF_END11
+label IF_END10
+label IF_END9
+label IF_END8
+label IF_END7
+label IF_END6
+label IF_END5
+label IF_END4
+label IF_END3
+label IF_END2
+label IF_END1
+label IF_END0
+push constant 0
+return

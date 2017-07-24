@@ -1,0 +1,158 @@
+/*
+EnemyShip - one enemy ship, with animation, floating, etc.
+ */
+class EnemyShip {
+    field boolean isAlive; // is in game
+    field boolean isExploding; // in exploding state
+    /*
+    explosionR - current explosion radius
+    maxExplosionR - maximum explosion radius
+     */
+    field int explosionR, maxExplosionR;
+    field int x, y;
+    field boolean toLeft; // float enemy ship to the left, or to the right if false :-)
+    field int offset; // offset to the left or to the right
+
+    constructor EnemyShip new() {
+        let maxExplosionR = 10;
+        let explosionR = 0;
+        return this;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /** mark as active, i.e. enemy ship is in game **/
+    method void activate(int Ax, int Ay) {
+        let explosionR = 0;
+        let isAlive = true;
+        let isExploding = false;
+        let x = Ax;
+        let y = Ay;
+        return;
+    }
+
+    /** disable **/
+    method void deactivate() {
+        let isAlive = false;
+        let isExploding = false;
+        do erase();
+        return;
+    }
+
+    /** getters **/
+    method int getX() { return x; }
+    method int getY() { return y; }
+    method boolean isAlive() { return isAlive; }
+
+    /** trigger explosion animation **/
+    method void explode() {
+        let isExploding = true;
+        if (explosionR < maxExplosionR) {
+            do erase();
+            do Screen.setColor(true);
+            do Screen.drawCircle(x + 8, y + 8, explosionR);
+            if (explosionR > 2) {
+                do Screen.setColor(false);
+                do Screen.drawCircle(x + 8, y + 8, explosionR - 2);
+            }
+            let explosionR = explosionR + 2;
+        }
+        else {
+            do deactivate();
+            do Screen.setColor(false);
+            do Screen.drawCircle(x + 8, y + 8, explosionR);
+        }
+        return;
+    }
+
+    /** render enemy ship **/
+    method void draw() {
+        var int memAddress;
+        let memAddress = 16384 + (x/16) + (y*32);
+        do Memory.poke(memAddress+0, 17826);
+        do Memory.poke(memAddress+32, 9156);
+        do Memory.poke(memAddress+64, 6552);
+        do Memory.poke(memAddress+96, 2016);
+        do Memory.poke(memAddress+128, 8184);
+        do Memory.poke(memAddress+160, 5064);
+        do Memory.poke(memAddress+192, 4488);
+        do Memory.poke(memAddress+224, 16380);
+        do Memory.poke(memAddress+256, 18834);
+        do Memory.poke(memAddress+288, -28087);
+        do Memory.poke(memAddress+320, -28087);
+        do Memory.poke(memAddress+352, -28663);
+        do Memory.poke(memAddress+384, -30703);
+        do Memory.poke(memAddress+416, 16386);
+        do Memory.poke(memAddress+448, 12876);
+        do Memory.poke(memAddress+480, 3120);
+        return;
+    }
+
+    /** render white pixels on top of enemy ship, effectively erasing it **/
+    method void erase() {
+        var int memAddress;
+        let memAddress = 16384 + (x/16) + (y*32);
+        do Memory.poke(memAddress+0, 0);
+        do Memory.poke(memAddress+32, 0);
+        do Memory.poke(memAddress+64, 0);
+        do Memory.poke(memAddress+96, 0);
+        do Memory.poke(memAddress+128, 0);
+        do Memory.poke(memAddress+160, 0);
+        do Memory.poke(memAddress+192, 0);
+        do Memory.poke(memAddress+224, 0);
+        do Memory.poke(memAddress+256, 0);
+        do Memory.poke(memAddress+288, 0);
+        do Memory.poke(memAddress+320, 0);
+        do Memory.poke(memAddress+352, 0);
+        do Memory.poke(memAddress+384, 0);
+        do Memory.poke(memAddress+416, 0);
+        do Memory.poke(memAddress+448, 0);
+        do Memory.poke(memAddress+480, 0);
+        return;
+    }
+
+    /** move enemy ship down, swaying it sideways, to the left or to the right **/
+    method void moveDown() {
+        if (y < 230) {
+            do erase(); // clear
+            let y = y + 2; // shift enemy ship lower
+            if (toLeft) { // if swaying to the left
+                if (offset < 8) { // sway it further to the left
+                    let x = x - 2;
+                    let offset = offset + 1;
+                }
+                else { // or switch swaying to the right
+                    let toLeft = false;
+                    let offset = 0;
+                }
+            }
+            else {
+                if (offset < 8) { // sway it further to the right
+                    let x = x + 2;
+                    let offset = offset + 1;
+                }
+                else { // or switch swaying to the left
+                    let toLeft = true;
+                    let offset = 0;
+                }
+            }
+            do draw();
+        }
+        return;
+    }
+
+    /** perform whatever is necessary in current state, gets called from programs mainloop **/
+    method void run() {
+        if (~isAlive) { return; }
+        if (~isExploding) { // if active and not exploding, render floating animation
+            do moveDown();
+        }
+        else { // otherwise if active and exploding, explode
+            do explode();
+        }
+        return;
+    }
+}

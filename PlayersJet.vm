@@ -1,0 +1,306 @@
+function PlayersJet.new 0
+push constant 2
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push pointer 0
+call PlayersJet.draw 1
+pop temp 0
+push pointer 0
+return
+function PlayersJet.getX 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function PlayersJet.getY 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function PlayersJet.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function PlayersJet.draw 1
+push argument 0
+pop pointer 0
+push constant 16384
+push this 0
+push constant 16
+call Math.divide 2
+add
+push this 1
+push constant 32
+call Math.multiply 2
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 384
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 384
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 384
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 1440
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 1440
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 31327
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 31807
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 32383
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 7801
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 26215
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 2016
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 2016
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 24583
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 7609
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 31135
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 31711
+neg
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function PlayersJet.erase 1
+push argument 0
+pop pointer 0
+push constant 16384
+push this 0
+push constant 16
+call Math.divide 2
+add
+push this 1
+push constant 32
+call Math.multiply 2
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function PlayersJet.moveLeft 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 1
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call PlayersJet.erase 1
+pop temp 0
+push this 0
+push constant 2
+sub
+pop this 0
+push pointer 0
+call PlayersJet.draw 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function PlayersJet.moveRight 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 510
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call PlayersJet.erase 1
+pop temp 0
+push this 0
+push constant 2
+add
+pop this 0
+push pointer 0
+call PlayersJet.draw 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return

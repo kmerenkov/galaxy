@@ -1,0 +1,109 @@
+/*
+GalaxyGame - very simple space invader clone
+ */
+class GalaxyGame {
+    field PlayersJet player; // players model
+    field BulletSet bullets; // bullets that player can fire
+    field EnemySet enemies; // enemies set
+    field int direction; // the player's current direction
+    // 0=none, 3=left, 4=right
+    field int skipTurnsBetweenShots; // counter that prevents from firing all bullets all at once
+    field int enemyFloatInterval; // counter that prevents enemies from moving too fast
+
+    constructor GalaxyGame new() {
+        // init player's model in the middle of the bottom of the screen
+        let player = PlayersJet.new(248, 230);
+        let direction = 0;  // initial state is no movement
+        let bullets = BulletSet.new();
+        let enemies = EnemySet.new();
+        do enemies.activate();
+        return this;
+    }
+
+    method void dispose() {
+        do player.dispose();
+        do bullets.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /** move player's jet depending on direction **/
+    method void movePlayer() {
+        if (direction = 3) { do player.moveLeft(); }
+        if (direction = 4) { do player.moveRight(); }
+        if (direction > 0) { let direction = 0; }
+        return;
+    }
+
+
+    method void endGame(String text) {
+        do Output.moveCursor(10, 30);
+        do Output.printString(text);
+        return;
+    }
+
+    /** programs mainloop **/
+    method void run() {
+        var char key;  // the key currently pressed by the user
+        var boolean exit;
+        let exit = false;
+
+        while (~exit) {
+            let key = Keyboard.keyPressed();
+            if (key = 81)  { let exit = true; }     // q key
+            if (key = 32)  { // space key
+                // limit fire rate, player can fire every 40 * 5 (Sys.wait arg) mainloop "ticks"
+                if (skipTurnsBetweenShots > 40) {
+                    let skipTurnsBetweenShots = 0;
+                }
+                else {
+                    if (skipTurnsBetweenShots = 0) {
+                        // launch bullet from players coord + a bit higher
+                        // so that bullet launches not from the player's jet itself
+                        // but slightly above it. Prevents player's jet from being
+                        // overdrawn by bullet
+                        do bullets.fire(player.getX(), player.getY() - 16);
+                    }
+                    let skipTurnsBetweenShots = skipTurnsBetweenShots + 1;
+                }
+            }
+            if (key = 130) { let direction = 3; }   // left arrow
+            if (key = 132) { let direction = 4; }   // right arrow
+
+            // enemy can move every 50 * 5 mainloop "ticks"
+            if (enemyFloatInterval > 50) {
+                let enemyFloatInterval = 0;
+            } else {
+                if (enemyFloatInterval = 0) { do enemies.run(); }
+                let enemyFloatInterval = enemyFloatInterval + 1;
+            }
+
+            // move player according to direction variable value
+            do movePlayer();
+            // run bullet's mainloop, pass enemies set in there
+            // to detect collisions of enemies with bullets
+            do bullets.run(enemies);
+
+            // if no enemies are left alive, the game is finished
+            if (~enemies.anyAliveEnemy()) {
+                do endGame("YOU WIN");
+                let exit = true;
+            }
+            else {
+                // if an enemy reaches end of the screen, game is over
+                // enemies don't get renewed, so it is possible to kill them all
+                if (enemies.reachedEnd()) {
+                    do endGame("GAME OVER");
+                    let exit = true;
+                }
+            }
+
+            // sleep
+            do Sys.wait(5);
+        }
+        return;
+    }
+}
+
+
+
